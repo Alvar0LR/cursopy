@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+#juegos
+juegos = ["Super Mario Bros", "Zelda Breath of the wild", "CyberPunk2077", "Final Fantasy VII"]
+tope=500
+
+#Generos
+generos={
+	"Super Mario Bros": "Aventura",
+	"Zelda Breath of the wild": "Avenutra",
+	"CyberPunk2077": "Rol",
+	"Final Fantasy VII": "Rol"
+}
+#Ventas y Stock
+ventas_y_stock = {
+	"Super Mario Bros": (400,200),
+	"Zelda Breath of the wild": (300,100),
+	"CyberPunk2077": (500,700),
+	"Final Fantasy VII": (800,250),
+}
+#Clientes
+clientes = {
+	"Super Mario Bros": {"Marcelo", "Savitar", "Antonio", "Pedro", "Lucia"},
+	"Zelda Breath of the wild": {"Marcelo", "Savitar", "Uriel", "Carlos", "Sofia"},
+	"CyberPunk2077": {"Uriel", "Sofia", "Antonio", "Pedro", "Lucia"},
+	"Final Fantasy VII": {"Lucia", "Sofia", "Antonio", "Carlos", "Savitar"}
+}
+
+def info(juego):
+	print(f"\n[I] Resumen del juego {juego}\n")
+	print(f"\t[G] Genero del juego: {generos[juego]}")
+	print(f"\t[%] El Total de ventas para este juego son: {ventas_y_stock[juego][0]} unidades")
+	print(f"\t[S] El Total de stock para este juego son: {ventas_y_stock[juego][1]} unidades")
+	print(f"\t[+] Clientes que han adquirido el juego: {', '.join(clientes[juego])}")
+
+for juego in juegos:
+	if ventas_y_stock[juego][0] >= tope:
+		info(juego)
+
+ventas_totales = lambda: sum(ventas for juego, (ventas, _) in ventas_y_stock.items() if ventas_y_stock[juego][0] >= tope)
+stock_par = lambda: sum(stock for juego, (_, stock) in ventas_y_stock.items() if ventas_y_stock[juego][1] % 2 == 0)
+claves= lambda: [x for x in generos.keys()]
+rol = lambda: [(x, y) for x, y in generos.items()]
+
+print(f"\n[+] Las ventas totales de todos los videojuegos han sido {ventas_totales()}")
+print(f"\n[*] El stock que hay entre todos los videojeugos es par {stock_par()}")
+print(f"\n[!] Rol -> {rol()}")
